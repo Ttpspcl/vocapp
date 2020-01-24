@@ -10,20 +10,21 @@ class Seun2Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.seun_2)
+        val intent = Intent(this, MainGameActivity::class.java)
 
         b = findViewById(R.id.easyMode)
         b.setOnClickListener {
-            val intent = Intent(this, main_game::class.java)
+            intent.putExtra(MainGameActivity.WORD_KEY, DataProvider.getEasyWord())
             startActivity(intent)
         }
         b = findViewById(R.id.intermediateMode)
         b.setOnClickListener {
-            val intent = Intent(this, main_game::class.java)
+            intent.putExtra(MainGameActivity.WORD_KEY, DataProvider.getMediumWord())
             startActivity(intent)
         }
         b = findViewById(R.id.expertMode)
         b.setOnClickListener {
-            val intent = Intent(this, main_game::class.java)
+            intent.putExtra(MainGameActivity.WORD_KEY, DataProvider.getHardWord())
             startActivity(intent)
         }
     }
