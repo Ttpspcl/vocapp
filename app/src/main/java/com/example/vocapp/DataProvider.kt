@@ -10,9 +10,9 @@ class DataProvider {
 
     companion object {
 
-        val easyWordList = mutableListOf<String>()
-        val mediumWordList = mutableListOf<String>()
-        val hardWordList = mutableListOf<String>()
+        private val easyWordList = mutableListOf<String>()
+        private val mediumWordList = mutableListOf<String>()
+        private val hardWordList = mutableListOf<String>()
 
         fun readWordsFromCSV(inputStream: InputStream) {
             if (easyWordList.isNotEmpty()) return
@@ -42,6 +42,8 @@ class DataProvider {
         fun getMediumWord() = mediumWordList[Random.nextInt(mediumWordList.size)]
 
         fun getHardWord() = hardWordList[Random.nextInt(hardWordList.size)]
+
+        fun isLetterAVowel(letter: Char): Boolean = "AEIOUNS".contains(letter)
     }
 
 }
