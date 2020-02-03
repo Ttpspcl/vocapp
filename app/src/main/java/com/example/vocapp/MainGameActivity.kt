@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main_game.*
 
 class MainGameActivity : AppCompatActivity() {
@@ -13,6 +14,9 @@ class MainGameActivity : AppCompatActivity() {
     }
 
     private lateinit var word: String
+    private var toast: Toast? = null
+
+    private var alreadyWords = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +31,33 @@ class MainGameActivity : AppCompatActivity() {
         deleteButton.setOnClickListener {
             deleteLetter(textView9.text.toString())
         }
+
+        checkWord.setOnClickListener { validateInput() }
     }
 
-    fun addLetter(letter: Char) {
+    private fun validateInput() {
+        val word = textView9.text.toString()
+        if (word.isNotEmpty()) {
+            if (DataProvider.validateWord(word)) {
+                if (alreadyWords.contains(word)) {
+                    showToast("Word has been validated already")
+                } else {
+                    showToast("Word Correct")
+                    val scoreBoard = textView7.text.toString()
+                    var score = scoreBoard.substring(8).toInt()
+                    alreadyWords.add(word)
+                    score++
+                    textView7.text = "SCORE : $score"
+                }
+            } else {
+                showToast("Invalid Word Formed")
+            }
+        } else {
+            showToast("Cannot Validate Empty Word")
+        }
+    }
+
+    private fun addLetter(letter: Char) {
         val letterView = SingleLetterView(this, letter)
         letterView.setOnClickListener {
             textView9.text = String.format("%s%s", textView9.text.toString(), (it as SingleLetterView).getLetter())
@@ -53,5 +81,11 @@ class MainGameActivity : AppCompatActivity() {
             textView9.text = word.substring(0, word.length - 1)
             addLetter(wordToRemove)
         }
+    }
+
+    private fun showToast(message: String) {
+        toast?.cancel()
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+        toast?.show()
     }
 }
