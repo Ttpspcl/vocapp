@@ -25,6 +25,7 @@ class SingleLetterView(
 
     fun activatePopup() {
         //TODO Write popup Code
+        
     }
 
     fun getLetter(): Char = letter
