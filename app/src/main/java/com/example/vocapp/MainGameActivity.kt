@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.util.Log
 
 
 class MainGameActivity : AppCompatActivity() {
@@ -152,6 +153,7 @@ class MainGameActivity : AppCompatActivity() {
 //        }
 //        return super.dispatchTouchEvent(ev)
 //    }
+
     override fun onBackPressed() {
         val word = textView9.text.toString()
         if (word.isNotEmpty()) {
@@ -163,9 +165,13 @@ class MainGameActivity : AppCompatActivity() {
 
     private fun deleteLetter(word: String) {
         if (word.isNotEmpty()) {
-            val wordToRemove = word.toCharArray()[word.length - 1]
-            textView9.text = word.substring(0, word.length - 1)
-            addLetter(wordToRemove)
+            var newWord = word
+            while (!newWord.toCharArray()[newWord.length - 1].isAlphabet()) {
+                newWord = newWord.substring(0, newWord.length - 1)
+            }
+            textView9.text = newWord.substring(0, newWord.length - 1)
+            Log.d("Word", newWord)
+            addLetter(newWord.toCharArray()[newWord.length - 1])
         }
     }
 
