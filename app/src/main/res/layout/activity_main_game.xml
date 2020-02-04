@@ -39,7 +39,7 @@
         android:paddingTop="4dp"
         android:paddingEnd="8dp"
         android:paddingBottom="4dp"
-        android:text="Score : "
+        android:text="Score : 0"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         android:textSize="20sp"
@@ -47,7 +47,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Score: 17" />
+        tools:text="Score : 17" />
 
     <ImageView
         android:id="@+id/imageView3"

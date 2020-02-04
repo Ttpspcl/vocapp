@@ -10,11 +10,13 @@ class DataProvider {
 
     companion object {
 
+        private val validWordList = mutableListOf<String>()
+
         private val easyWordList = mutableListOf<String>()
         private val mediumWordList = mutableListOf<String>()
         private val hardWordList = mutableListOf<String>()
 
-        fun readWordsFromCSV(inputStream: InputStream) {
+        fun readInputWordFromCSV(inputStream: InputStream) {
             if (easyWordList.isNotEmpty()) return
             try {
                 val reader = BufferedReader(InputStreamReader(inputStream, Charset.forName("UTF-8")))
@@ -37,13 +39,29 @@ class DataProvider {
             }
         }
 
+        fun readValidWordsFromCSV(inputStream: InputStream) {
+            if (validWordList.isNotEmpty()) return
+            try {
+                val reader = BufferedReader(InputStreamReader(inputStream, Charset.forName("UTF-8")))
+                reader.readLines().forEach {
+                    Log.d("Data Provider", it)
+                    val tempWordList = it.split(",").toMutableList()
+                    validWordList.addAll(tempWordList)
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
         fun getEasyWord() = easyWordList[Random.nextInt(easyWordList.size)]
 
         fun getMediumWord() = mediumWordList[Random.nextInt(mediumWordList.size)]
 
         fun getHardWord() = hardWordList[Random.nextInt(hardWordList.size)]
 
-        fun isLetterAVowel(letter: Char): Boolean = "AEIOUNS".contains(letter)
+        fun isLetterAVowel(letter: String): Boolean = "AEIOUNS".contains(letter)
+
+        fun validateWord(word: String): Boolean = validWordList.contains(word)
     }
 
 }

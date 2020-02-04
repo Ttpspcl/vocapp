@@ -7,10 +7,10 @@ import androidx.cardview.widget.CardView
 
 class SingleLetterView(
     context: Context,
-    letter: Char
+    letter: String
 ) : CardView(context) {
 
-    private var letter: Char
+    private var letter: String
 
     init {
         View.inflate(context, R.layout.single_letter_view, this)
@@ -28,6 +28,6 @@ class SingleLetterView(
         
     }
 
-    fun getLetter(): Char = letter
+    fun getLetter(): String = letter
 
 }
