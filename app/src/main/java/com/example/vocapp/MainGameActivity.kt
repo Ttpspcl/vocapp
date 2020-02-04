@@ -24,13 +24,13 @@ class MainGameActivity : AppCompatActivity() {
     }
 
     private lateinit var word: String
-    private var diatA = "AAAà".toCharArray()
-    private var diatE = "EEEE".toCharArray()
-    private var diatI = "III".toCharArray()
-    private var diatO = "OOO".toCharArray()
-    private var diatU = "UUU".toCharArray()
-    private var diatN = "NNN".toCharArray()
-    private var diatS = "S".toCharArray()
+    private val diatA = charArrayOf('A','A','A', c'à')
+    private val diatE = "EEEE".toCharArray()
+    private val diatI = "III".toCharArray()
+    private val diatO = "OOO".toCharArray()
+    private val diatU = "UUU".toCharArray()
+    private val diatN = "NNN".toCharArray()
+    private val diatS = "S".toCharArray()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
