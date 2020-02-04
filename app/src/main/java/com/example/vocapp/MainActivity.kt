@@ -4,8 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
-import java.io.File
 import java.io.InputStream
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +13,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val inputStream: InputStream = resources.openRawResource(R.raw.syllables)
-        DataProvider.readWordsFromCSV(inputStream)
+        DataProvider.readInputWordFromCSV(inputStream)
+
+        val validStream: InputStream = resources.openRawResource(R.raw.voccapputf)
+        DataProvider.readValidWordsFromCSV(validStream)
 
         b = findViewById(R.id.startGameButton)
         b.setOnClickListener {
