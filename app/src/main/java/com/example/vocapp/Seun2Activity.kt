@@ -14,17 +14,17 @@ class Seun2Activity : AppCompatActivity() {
 
         b = findViewById(R.id.easyMode)
         b.setOnClickListener {
-            intent.putExtra(MainGameActivity.WORD_KEY, DataProvider.getEasyWord())
+            intent.putExtra(MainGameActivity.WORD_KEY, MainGameActivity.EASY_KEY)
             startActivity(intent)
         }
         b = findViewById(R.id.intermediateMode)
         b.setOnClickListener {
-            intent.putExtra(MainGameActivity.WORD_KEY, DataProvider.getMediumWord())
+            intent.putExtra(MainGameActivity.WORD_KEY, MainGameActivity.MID_KEY)
             startActivity(intent)
         }
         b = findViewById(R.id.expertMode)
         b.setOnClickListener {
-            intent.putExtra(MainGameActivity.WORD_KEY, DataProvider.getHardWord())
+            intent.putExtra(MainGameActivity.WORD_KEY, MainGameActivity.HARD_KEY)
             startActivity(intent)
         }
     }

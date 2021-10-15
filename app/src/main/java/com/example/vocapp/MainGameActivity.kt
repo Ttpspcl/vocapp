@@ -22,9 +22,13 @@ class MainGameActivity : AppCompatActivity() {
 
     companion object {
         const val WORD_KEY = "word_key"
+        const val EASY_KEY = "easy_key"
+        const val MID_KEY = "mid_key"
+        const val HARD_KEY = "hard_key"
     }
 
     private lateinit var word: String
+    private lateinit var diff: String
     private var toast: Toast? = null
 
     private val diatA = arrayOf("à", "a", "á")
@@ -41,18 +45,31 @@ class MainGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_game)
 
-        word = intent.getStringExtra(WORD_KEY)!!
+        diff = intent.getStringExtra(WORD_KEY)!!
 
-        word = word.shuffle()
-//        specialLettersContainerLinearLayout.focusable = true;
-        specialLettersContainerLinearLayout.visibility = View.INVISIBLE
-        for (char in word.toCharArray()) { addLetter(char) }
+        setupScreen()
 
         deleteButton.setOnClickListener {
             deleteLetter(textView9.text.toString())
         }
 
+        tryNewWordButton.setOnClickListener {
+            resetScreen()
+        }
+
         checkWord.setOnClickListener { validateInput() }
+    }
+
+    fun setupScreen() {
+       word =  when(diff) {
+           EASY_KEY -> DataProvider.getEasyWord()
+           MID_KEY -> DataProvider.getMediumWord()
+           HARD_KEY -> DataProvider.getHardWord()
+           else -> ""
+       }
+        word = word.shuffle()
+        specialLettersContainerLinearLayout.visibility = View.INVISIBLE
+        for (char in word.toCharArray()) { addLetter(char) }
     }
 
     private fun validateInput() {
@@ -68,6 +85,8 @@ class MainGameActivity : AppCompatActivity() {
                     alreadyWords.add(word)
                     score++
                     textView7.text = "SCORE : $score"
+
+                    while(textView9.text.isNotEmpty()) deleteLetter(textView9.text.toString())
                 }
             } else {
                 showToast("Invalid Word Formed")
@@ -173,6 +192,12 @@ class MainGameActivity : AppCompatActivity() {
             Log.d("Word", newWord)
             addLetter(newWord.toCharArray()[newWord.length - 1])
         }
+    }
+
+    private fun resetScreen() {
+        textView9.text = ""
+        lettersContainerLinearLayout.removeAllViews()
+        setupScreen()
     }
 
     private fun showToast(message: String) {
