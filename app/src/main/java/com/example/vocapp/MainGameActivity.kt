@@ -27,13 +27,13 @@ class MainGameActivity : AppCompatActivity() {
     private lateinit var word: String
     private var toast: Toast? = null
 
-    private val diatA = arrayOf('A','A','A', "à")
-    private val diatE = "EEEE".toCharArray()
-    private val diatI = "III".toCharArray()
-    private val diatO = "OOO".toCharArray()
-    private val diatU = "UUU".toCharArray()
-    private val diatN = "NNN".toCharArray()
-    private val diatS = "S".toCharArray()
+    private val diatA = arrayOf("à", "a", "á")
+    private val diatE = arrayOf("è", "e", "é", "ẹ̀", "ẹ", "ẹ́")
+    private val diatI = arrayOf("ì", "i", "í")
+    private val diatO = arrayOf("ò", "o", "ó", "ọ̀", "ọ", "ọ́")
+    private val diatU = arrayOf("ù", "u", "ú")
+    private val diatN = arrayOf("ǹ", "n", "ń")
+    private val diatS = arrayOf("s", "ṣ")
 
     private var alreadyWords = mutableListOf<String>()
 

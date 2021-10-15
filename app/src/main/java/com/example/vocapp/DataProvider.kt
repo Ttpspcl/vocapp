@@ -61,7 +61,10 @@ class DataProvider {
 
         fun isLetterAVowel(letter: String): Boolean = "AEIOUNS".contains(letter)
 
-        fun validateWord(word: String): Boolean = validWordList.contains(word)
+        fun validateWord(word: String): Boolean {
+            Log.d("TAG", word)
+            return validWordList.contains(word)
+        }
     }
 
 }
